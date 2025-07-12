@@ -1,0 +1,50 @@
+const std = @import("std");
+
+pub fn build(b: *std.Build) !void {
+    const target = b.standardTargetOptions(.{});
+    const optimize = b.standardOptimizeOption(.{});
+
+    const cc_flags = &[_][]const u8{
+        "-std=c23",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        // below is for generation of compile_commands.json
+        // ref: https://github.com/ziglang/zig/issues/9323#issuecomment-1646590552
+        "-gen-cdb-fragment-path",
+        ".cache/cdb",
+    };
+
+    const foolib = b.addLibrary(.{
+        .linkage = .static,
+        .name = "foo",
+        .root_module = b.createModule(.{
+            .root_source_file = null,
+            .target = target,
+            .optimize = optimize,
+        }),
+    });
+    foolib.addCSourceFiles(.{
+        .files = &[_][]const u8{
+            "src/foo.c",
+        },
+        .flags = cc_flags,
+    });
+    b.installArtifact(foolib);
+
+    const exe = b.addExecutable(.{
+        .name = "main",
+        .target = target,
+        .optimize = optimize,
+    });
+    exe.addCSourceFiles(.{
+        .files = &[_][]const u8{
+            "src/bin/main.c",
+        },
+        .flags = cc_flags,
+    });
+    exe.addIncludePath(b.path("src"));
+    exe.linkLibrary(foolib);
+    exe.linkLibC();
+    b.installArtifact(exe);
+}

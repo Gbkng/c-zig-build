@@ -8,14 +8,22 @@ More info at https://github.com/tzador/makedown
 
 # [build]() build a shared amd64 linux executable using system libc
 
+The `.cache` directory is needed for generation of cdb files. 
+Those files are required for generation of the `compile_commands.json`.
+
 ```
+mkdir -p .cache
 zig build
 ```
 
 # [build-static]() build a static amd64 linux executable using musl libc
 
+The `.cache` directory is needed for generation of cdb files. 
+Those files are required for generation of the `compile_commands.json`.
+
 ```
 zig build --target=x86_64-linux-musl
+mkdir -p .cache
 ```
 
 # [compile-commands]() generate a compilation database 

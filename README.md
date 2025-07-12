@@ -22,8 +22,8 @@ The `.cache` directory is needed for generation of cdb files.
 Those files are required for generation of the `compile_commands.json`.
 
 ```
-zig build --target=x86_64-linux-musl
 mkdir -p .cache
+zig build -Dtarget=x86_64-linux-musl
 ```
 
 # [compile-commands]() generate a compilation database 

@@ -13,7 +13,7 @@ Those files are required for generation of the `compile_commands.json`.
 
 ```
 mkdir -p .cache
-zig build
+zig build --summary all
 ```
 
 # [build-static]() build a static amd64 linux executable using musl libc
@@ -23,7 +23,7 @@ Those files are required for generation of the `compile_commands.json`.
 
 ```
 mkdir -p .cache
-zig build -Dtarget=x86_64-linux-musl
+zig build -Dtarget=x86_64-linux-musl --summary all
 ```
 
 # [compile-commands]() generate a compilation database 

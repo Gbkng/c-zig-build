@@ -44,6 +44,7 @@ pub fn build(b: *std.Build) !void {
         .flags = cc_flags,
     });
     exe.addIncludePath(b.path("src"));
+    exe.linkSystemLibrary("ncurses");
     exe.linkLibrary(foolib);
     exe.linkLibC();
     b.installArtifact(exe);

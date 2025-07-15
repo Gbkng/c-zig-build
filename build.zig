@@ -4,6 +4,10 @@ pub fn build(b: *std.Build) !void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
+
+    // The `.cache` directory is needed for generation of cdb files. Those files
+    // are required for generation of the `compile_commands.json`.
+    try std.fs.cwd().makePath(".cache");
     const cc_flags = &[_][]const u8{
         "-std=c23",
         "-Wall",

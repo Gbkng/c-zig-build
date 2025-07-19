@@ -20,6 +20,10 @@ pub fn build(b: *std.Build) !void {
         ".cache/cdb",
     };
 
+    // TODO only run this command on UNIX systems, skip on Windows
+    const tool_run = b.addSystemCommand(&.{"./generate_compcmd_json.sh"});
+    b.getInstallStep().dependOn(&tool_run.step);
+
     const foolib = b.addLibrary(.{
         .linkage = .static,
         .name = "foo",

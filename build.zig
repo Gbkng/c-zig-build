@@ -5,10 +5,6 @@ pub fn build(b: *std.Build) !void {
     const optimize = b.standardOptimizeOption(.{});
 
 
-    // The `.cache` directory is needed for generation of cdb files. Those files
-    // are required for generation of the `compile_commands.json`.
-    try std.fs.cwd().makePath(".cache");
-
     const cc_flags = &.{
         "-std=c23",
         "-Wall",
@@ -23,6 +19,10 @@ pub fn build(b: *std.Build) !void {
     // TODO only run this command on UNIX systems, skip on Windows
     const tool_run = b.addSystemCommand(&.{"./generate_compcmd_json.sh"});
     b.getInstallStep().dependOn(&tool_run.step);
+    // The `.cache` directory is needed for generation of `cdb` files. Those
+    // files are required for generation of the compilation database
+    // (`compile_commands.json`).
+    try std.fs.cwd().makePath(".cache");
 
     const foolib = b.addLibrary(.{
         .linkage = .static,

@@ -10,7 +10,7 @@ pub fn build(b: *std.Build) !void {
         "-Wall",
         "-Wextra",
         "-Werror",
-        // below is for generation of compile_commands.json
+        // below is for generation of compilation database
         // ref: https://github.com/ziglang/zig/issues/9323#issuecomment-1646590552
         "-gen-cdb-fragment-path",
         ".cache/cdb",

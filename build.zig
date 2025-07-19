@@ -68,4 +68,15 @@ pub fn build(b: *std.Build) !void {
     const run_exe = b.addRunArtifact(exe);
     const run_step = b.step("run", "Run the application");
     run_step.dependOn(&run_exe.step);
+
+    // add a pure Zig executable using C library defined above 
+    const bar_exe = b.addExecutable(
+        .{
+            .name = "bar",
+            .root_source_file = b.path("src/bar.zig"),
+            .target = target,
+            .optimize = optimize,
+        },
+    );
+    bar_exe.addIncludePath(b.path("src"));
 }

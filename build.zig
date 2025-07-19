@@ -24,7 +24,9 @@ pub fn build(b: *std.Build) !void {
     const gen_comp_db_run = b.addSystemCommand(&.{"./generate_compcmd_json.sh"});
     gen_comp_db_step.dependOn(&gen_comp_db_run.step);
 
-    // TODO check if bash is available on host, skip otherwise.
+    // TODO if bash is not found, do not generate compilation database instead
+    // of panicking
+    _ = try b.findProgram(&.{"bash"}, &.{"/usr/bin", "/bin"});
     b.getInstallStep().dependOn(gen_comp_db_step);
 
     const foolib = b.addLibrary(.{

@@ -56,11 +56,11 @@ pub fn build(b: *std.Build) !void {
         },
         .flags = cc_flags,
     });
-    exe.addIncludePath(b.path("src"));
-    exe.linkSystemLibrary("ncurses");
-    exe.linkLibrary(foolib);
     exe.linkLibC();
     exe.linkSystemLibrary("mpi");
+    exe.linkSystemLibrary("ncurses");
+    exe.linkLibrary(foolib);
+    exe.addIncludePath(b.path("src"));
 
     b.installArtifact(exe);
 

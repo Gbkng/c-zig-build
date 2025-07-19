@@ -1,5 +1,6 @@
 #include "foo.h"
 #include <stdio.h>
+#include <mpi.h>
 #include <ncurses.h>
 
 int main(void) {

@@ -16,13 +16,16 @@ pub fn build(b: *std.Build) !void {
         ".cache/cdb",
     };
 
-    // TODO only run this command on UNIX systems, skip on Windows
-    const tool_run = b.addSystemCommand(&.{"./generate_compcmd_json.sh"});
-    b.getInstallStep().dependOn(&tool_run.step);
     // The `.cache` directory is needed for generation of `cdb` files. Those
     // files are required for generation of the compilation database
     // (`compile_commands.json`).
     try std.fs.cwd().makePath(".cache");
+    const gen_comp_db_step = b.step("gen-comp-db", "Generate compilation database");
+    const gen_comp_db_run = b.addSystemCommand(&.{"./generate_compcmd_json.sh"});
+    gen_comp_db_step.dependOn(&gen_comp_db_run.step);
+
+    // TODO check if bash is available on host, skip otherwise.
+    b.getInstallStep().dependOn(gen_comp_db_step);
 
     const foolib = b.addLibrary(.{
         .linkage = .static,

@@ -19,6 +19,9 @@ be kept in sync with latest Zig version (i.e. fixing breaking changes) on a
 best-effort basis. The content mights be out-of-date against latest Zig
 version.
 
+If your Zig version is too old, `zig build` command will fail due to a check
+performed in `build.zig`.
+
 # [build]() build a shared amd64 linux executable using system libc
 
 ```

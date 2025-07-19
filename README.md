@@ -9,6 +9,8 @@ More info at https://github.com/tzador/makedown
 # Relevant resource (warning: API in ref is out-of-date with Zig >= 0.14):
 - [1] https://zig.news/kristoff/make-zig-your-c-c-build-system-28g5
 - [2] https://zig.news/xq/zig-build-explained-part-1-59lf (cited by [1])
+- [3] https://ziggit.dev/t/build-system-tricks/3531
+- [4] https://ziglang.org/learn/build-system/#run-step
 
 # Obsolescence warning 
 

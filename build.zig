@@ -8,7 +8,8 @@ pub fn build(b: *std.Build) !void {
     // The `.cache` directory is needed for generation of cdb files. Those files
     // are required for generation of the `compile_commands.json`.
     try std.fs.cwd().makePath(".cache");
-    const cc_flags = &[_][]const u8{
+
+    const cc_flags = &.{
         "-std=c23",
         "-Wall",
         "-Wextra",
@@ -29,7 +30,7 @@ pub fn build(b: *std.Build) !void {
         }),
     });
     foolib.addCSourceFiles(.{
-        .files = &[_][]const u8{
+        .files = &.{
             "src/foo.c",
         },
         .flags = cc_flags,
@@ -42,7 +43,7 @@ pub fn build(b: *std.Build) !void {
         .optimize = optimize,
     });
     exe.addCSourceFiles(.{
-        .files = &[_][]const u8{
+        .files = &.{
             "src/bin/main.c",
         },
         .flags = cc_flags,

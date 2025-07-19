@@ -4,7 +4,6 @@ pub fn build(b: *std.Build) !void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
-
     const cc_flags = &.{
         "-std=c23",
         "-Wall",
@@ -26,7 +25,7 @@ pub fn build(b: *std.Build) !void {
 
     // TODO if bash is not found, do not generate compilation database instead
     // of panicking
-    _ = try b.findProgram(&.{"bash"}, &.{"/usr/bin", "/bin"});
+    _ = try b.findProgram(&.{"bash"}, &.{ "/usr/bin", "/bin" });
     b.getInstallStep().dependOn(gen_comp_db_step);
 
     const foolib = b.addLibrary(.{

@@ -2,16 +2,26 @@ const std = @import("std");
 const builtin = @import("builtin");
 
 comptime {
-    const required_zig = "0.14.0";
-    const current_zig = builtin.zig_version;
-    const min_zig = std.SemanticVersion.parse(required_zig) catch unreachable;
-    if (current_zig.order(min_zig) == .lt) {
+    const required = std.SemanticVersion{
+        .major = 0,
+        .minor = 14,
+        .patch = 0,
+    };
+    const current = builtin.zig_version;
+    if (current.order(required) == .lt) {
         const error_message =
-            \\It looks like your version of zig is too old. 
-            \\This project requires at least Zig 0.14.0
+            \\Your version of zig is too old ({d}.{d}.{d}). 
+            \\This project requires at least Zig {d}.{d}.{d}.
             \\You can download a compatible build from: https://ziglang.org/download/
         ;
-        @compileError(std.fmt.comptimePrint(error_message, .{min_zig}));
+        @compileError(std.fmt.comptimePrint(error_message, .{
+            current.major,
+            current.minor,
+            current.patch,
+            required.major,
+            required.minor,
+            required.patch,
+        }));
     }
 }
 
@@ -83,7 +93,7 @@ pub fn build(b: *std.Build) !void {
     const run_step = b.step("run", "Run the application");
     run_step.dependOn(&run_exe.step);
 
-    // add a pure Zig executable using C library defined above 
+    // add a pure Zig executable using C library defined above
     const bar_exe = b.addExecutable(
         .{
             .name = "bar",

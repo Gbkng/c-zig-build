@@ -22,13 +22,13 @@ version.
 If your Zig version is too old, `zig build` command will fail due to a check
 performed in `build.zig`.
 
-# [build]() build a shared amd64 linux executable using system libc
+# [build]() build a linux dynamic executable using system's libc
 
 ```
 zig build --summary all
 ```
 
-# [build-static]() build a static amd64 linux executable using musl libc
+# [build-static]() build an x86_64 linux static executable using zig-provided musl libc
 
 ```
 zig build -Dtarget=x86_64-linux-musl --summary all

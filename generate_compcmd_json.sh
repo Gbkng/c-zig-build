@@ -8,7 +8,7 @@
 # - format JSON with jq
 # - filter out lines with "no-default-cofig"
 
-(echo "["; cat .cache/cdb/*; echo "{}]") | 
-  perl -0777 -pe 's/,\n\{\}//igs' | 
-  jq . | 
+(echo "["; cat .cache/cdb/*; echo "{}]") |
+  perl -0777 -pe 's/,\n\{\}//igs' |
+  jq . |
   grep -v 'no-default-config' > compile_commands.json

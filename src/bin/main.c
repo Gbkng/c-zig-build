@@ -1,7 +1,7 @@
 #include "foo.h"
-#include <stdio.h>
 #include <mpi.h>
 #include <ncurses.h>
+#include <stdio.h>
 
 int main(int argc, char **argv) {
 
@@ -14,7 +14,7 @@ int main(int argc, char **argv) {
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
-    printf("#%d/%d finalizaing MPI...\n", rank, size-1);
+    printf("#%d/%d finalizaing MPI...\n", rank, size - 1);
 
     MPI_Finalize();
   }

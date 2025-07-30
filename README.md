@@ -1,7 +1,7 @@
 # Introduction
 
 This project is an example of using the Zig build system to build a C project
-composed of a C library and a C executable. 
+composed of a C library and a C executable.
 
 This file is also a makedown file.
 More info at https://github.com/tzador/makedown
@@ -12,7 +12,7 @@ More info at https://github.com/tzador/makedown
 - [3] https://ziggit.dev/t/build-system-tricks/3531
 - [4] https://ziglang.org/learn/build-system/#run-step
 
-# Obsolescence warning 
+# Obsolescence warning
 
 This project is only a small proof-of-concept, initiated with Zig 0.14. It will
 be kept in sync with latest Zig version (i.e. fixing breaking changes) on a
@@ -34,7 +34,7 @@ zig build --summary all
 zig build -Dtarget=x86_64-linux-musl --summary all
 ```
 
-# [compile-commands]() generate a compilation database 
+# [compile-commands]() generate a compilation database
 
 ```
 ./generate_compcmd_json.sh

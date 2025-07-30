@@ -10,7 +10,7 @@ comptime {
     const current = builtin.zig_version;
     if (current.order(required) == .lt) {
         const error_message =
-            \\Your version of zig is too old ({d}.{d}.{d}). 
+            \\Your version of zig is too old ({d}.{d}.{d}).
             \\This project requires at least Zig {d}.{d}.{d}.
             \\You can download a compatible build from: https://ziglang.org/download/
         ;
@@ -44,8 +44,8 @@ pub fn build(b: *std.Build) !void {
     // files are required for generation of the compilation database
     // (`compile_commands.json`).
     try std.fs.cwd().makePath(".cache");
-    const gen_comp_db_step = b.step("gen-comp-db", "Generate compilation database");
     const gen_comp_db_run = b.addSystemCommand(&.{"./generate_compcmd_json.sh"});
+    const gen_comp_db_step = b.step("gen-comp-db", "Generate compilation database");
     gen_comp_db_step.dependOn(&gen_comp_db_run.step);
 
     // TODO if bash is not found, do not generate compilation database instead

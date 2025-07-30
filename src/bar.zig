@@ -1,4 +1,4 @@
-const std =@import("std");
+const std = @import("std");
 
 const foo = @cImport({
     @cInclude("foo.c");

@@ -1,0 +1,22 @@
+name: CI
+on:
+  pull_request:
+  release:
+    types:
+      - published
+
+jobs:
+  test-linux:
+    runs-on: ubuntu-latest
+    # runs-on: windows-latest
+    # runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Zig
+        uses: mlugg/setup-zig@v2
+        with:
+          version: 0.14.1
+      - name: Run pre-commit
+        uses: pre-commit/action@v2.0.3
+      - name: Build with Zig
+        run: zig build
